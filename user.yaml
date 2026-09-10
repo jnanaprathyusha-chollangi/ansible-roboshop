@@ -1,5 +1,5 @@
-- name: configure catalogue
-  hosts: catalogue
+- name: configure user
+  hosts: user
   become: yes
   tasks: 
   - name: enable nodejs 20
@@ -28,19 +28,19 @@
       path: /app
       state: directory
   
-  - name: delete catalogue zip file
+  - name: delete user zip file
     ansible.builtin.file:
-      path: /tmp/catalogue.zip
+      path: /tmp/user.zip
       state: absent 
 
-  - name: download catalogue
+  - name: download user
     ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
-      dest: /tmp/catalogue.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
+      dest: /tmp/user.zip
     
-  - name: unarchive catalogue means unzip catalogue
+  - name: unarchive user means unzip user
     ansible.builtin.unarchive:
-      src: /tmp/catalogue.zip
+      src: /tmp/user.zip
       dest: /app
       remote_src: yes
 
@@ -48,15 +48,15 @@
     community.general.npm:
       path: /app
 
-  - name: copy the catalogue service
+  - name: copy the user service
     ansible.builtin.template:
-      src: catalogue.service
-      dest: /etc/systemd/system/catalogue.service
+      src: user.service
+      dest: /etc/systemd/system/user.service
 
 
-  - name: start catalogue
+  - name: start user
     ansible.builtin.service:
-      name: catalogue
+      name: user
       state: restarted
       enabled: yes  
 
