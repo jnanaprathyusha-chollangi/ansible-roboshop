@@ -44,7 +44,7 @@
       dest: /etc/systemd/system/catalogue.service
 
   - name: copy the mongo repo # need to load the data in mongodb , means in data base
-    ansbile.builtin.copy:
+    ansible.builtin.copy:
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
   
