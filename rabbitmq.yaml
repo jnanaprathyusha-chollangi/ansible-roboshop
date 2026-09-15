@@ -1,0 +1,8 @@
+- name: configure the rabbitmq
+  hosts: rabbitmq 
+  become: yes
+  tasks:
+  - name: create the file 
+    ansible.builtin.file:
+      src:
+      dest: 
